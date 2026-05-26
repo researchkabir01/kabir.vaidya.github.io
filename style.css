@@ -440,6 +440,11 @@ footer {
   color: #3a6b3a;
 }
 
+.status-ongoing {
+  background: #fef3c7;
+  color: #92400e;
+}
+
 .status-complete {
   background: var(--paper-warm);
   color: var(--ink-faint);
