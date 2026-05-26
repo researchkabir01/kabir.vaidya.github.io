@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects — Your Name</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-name">your.name</a>
+  <ul class="nav-links">
+    <li><a href="index.html">about</a></li>
+    <li><a href="cv.html">cv</a></li>
+    <li><a href="projects.html" class="active">projects</a></li>
+  </ul>
+</nav>
+
+<main class="container">
+
+  <div class="page-header">
+    <div>
+      <h1>Projects</h1>
+      <p>Current and past research. Full publication list on the <a href="cv.html">CV page</a>.</p>
+    </div>
+  </div>
+
+  <div class="project-list">
+
+    <!-- ======== PROJECT 1 — ACTIVE ======== -->
+    <div class="project">
+      <div class="project-meta">
+        <span class="project-status status-active">active</span>
+        <span class="project-year">2025 – present</span>
+      </div>
+      <h2>Your Current Main Research Project</h2>
+      <div class="project-tags">
+        <span class="tag">topic A</span>
+        <span class="tag">topic B</span>
+        <span class="tag">methodology</span>
+      </div>
+      <p>
+        A paragraph describing your main ongoing project. What question are you trying
+        to answer? What is your approach? What makes it novel or interesting? Keep it
+        accessible — a smart person outside your field should be able to follow the gist.
+      </p>
+      <div class="project-links">
+        <a href="https://github.com/yourusername/project-repo" class="project-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+          </svg>
+          code
+        </a>
+        <a href="#" class="project-link">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+          </svg>
+          preprint
+        </a>
+      </div>
+    </div>
+
+    <!-- ======== PROJECT 2 — ACTIVE ======== -->
+    <div class="project">
+      <div class="project-meta">
+        <span class="project-status status-active">active</span>
+        <span class="project-year">2024 – present</span>
+      </div>
+      <h2>A Second Ongoing Collaboration</h2>
+      <div class="project-tags">
+        <span class="tag">topic C</span>
+        <span class="tag">collaborative</span>
+      </div>
+      <p>
+        Brief description of a second project. Who are your collaborators?
+        What stage is this work at? What are the expected outcomes?
+      </p>
+      <div class="project-links">
+        <a href="#" class="project-link">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          project page
+        </a>
+      </div>
+    </div>
+
+    <!-- ======== PROJECT 3 — COMPLETE ======== -->
+    <div class="project">
+      <div class="project-meta">
+        <span class="project-status status-complete">complete</span>
+        <span class="project-year">2022 – 2024</span>
+      </div>
+      <h2>MSc or Undergraduate Project Title</h2>
+      <div class="project-tags">
+        <span class="tag">topic D</span>
+        <span class="tag">published</span>
+      </div>
+      <p>
+        Describe a completed project — your MSc thesis, a published paper, or a finished
+        side project. What did you find? Where was it published or presented?
+      </p>
+      <div class="project-links">
+        <a href="#" class="project-link">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+          </svg>
+          paper
+        </a>
+        <a href="https://github.com/yourusername/old-project" class="project-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+          </svg>
+          code
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<footer>
+  updated may 2026
+</footer>
+
+</body>
+</html>
