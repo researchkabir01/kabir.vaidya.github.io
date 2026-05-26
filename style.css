@@ -125,9 +125,9 @@ footer {
 }
 
 .photo {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  border-radius: 60%;
   object-fit: cover;
   object-position: center;
   display: block;
