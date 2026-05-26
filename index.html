@@ -1,526 +1,127 @@
-/* ============================================
-   ACADEMIC PERSONAL WEBSITE — style.css
-   ============================================ */
-
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap');
-
-/* ---- RESET & BASE ---- */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-:root {
-  --ink:         #1a1a18;
-  --ink-muted:   #6b6b66;
-  --ink-faint:   #a8a8a2;
-  --paper:       #faf9f6;
-  --paper-warm:  #f2f0ea;
-  --accent:      #3b4a6b;
-  --accent-hover:#2a3756;
-  --rule:        #dddbd4;
-  --serif:       'EB Garamond', Georgia, serif;
-  --mono:        'DM Mono', monospace;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: var(--serif);
-  background: var(--paper);
-  color: var(--ink);
-  font-size: 18px;
-  line-height: 1.75;
-}
-
-a {
-  color: var(--accent);
-  text-decoration: none;
-  transition: color 0.15s;
-}
-
-a:hover {
-  color: var(--accent-hover);
-}
-
-/* ---- NAVIGATION ---- */
-nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--paper);
-  border-bottom: 1px solid var(--rule);
-  padding: 0 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 56px;
-}
-
-.nav-name {
-  font-family: var(--mono);
-  font-size: 15px;
-  color: var(--ink-muted);
-  letter-spacing: 0.04em;
-  text-decoration: none;
-}
-
-.nav-links {
-  display: flex;
-  gap: 2rem;
-  list-style: none;
-}
-
-.nav-links a {
-  font-family: var(--mono);
-  font-size: 13px;
-  color: var(--ink-muted);
-  letter-spacing: 0.05em;
-  text-transform: lowercase;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-  color: var(--ink);
-}
-
-/* ---- LAYOUT ---- */
-.container {
-  max-width: 740px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-/* ---- FOOTER ---- */
-footer {
-  text-align: center;
-  padding: 2rem;
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--ink-faint);
-  letter-spacing: 0.04em;
-}
-
-/* ============================================
-   INDEX PAGE
-   ============================================ */
-
-.hero {
-  padding: 5rem 0 4rem;
-  border-bottom: 1px solid var(--rule);
-}
-
-.hero-inner {
-  display: flex;
-  align-items: flex-start;
-  gap: 3rem;
-}
-
-/* ---- PHOTO ---- */
-.photo-wrap {
-  flex-shrink: 0;
-}
-
-.photo {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-  border: 1px solid var(--rule);
-}
-
-/* ---- HERO TEXT ---- */
-.hero-text h1 {
-  font-size: 2.4rem;
-  font-weight: 400;
-  line-height: 1.15;
-  margin-bottom: 0.35rem;
-  letter-spacing: -0.01em;
-}
-
-.hero-text .position {
-  font-family: var(--mono);
-  font-size: 13px;
-  color: var(--ink-muted);
-  letter-spacing: 0.04em;
-  margin-bottom: 1.2rem;
-}
-
-.hero-text p {
-  color: var(--ink-muted);
-  font-size: 1rem;
-  max-width: 480px;
-}
-
-/* ---- CONTACT LINKS ---- */
-.contact-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.4rem;
-  margin-top: 1.6rem;
-}
-
-.contact-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  font-family: var(--mono);
-  font-size: 13px;
-  color: var(--accent);
-  letter-spacing: 0.02em;
-}
-
-.contact-link:hover {
-  color: var(--accent-hover);
-}
-
-.contact-link svg {
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-/* ---- HOME SECTIONS ---- */
-.home-section {
-  padding: 3.5rem 0;
-  border-bottom: 1px solid var(--rule);
-}
-
-.home-section:last-of-type {
-  border-bottom: none;
-}
-
-.section-label {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  margin-bottom: 1.5rem;
-}
-
-/* ---- NEWS ---- */
-.news-list {
-  list-style: none;
-}
-
-.news-item {
-  display: grid;
-  grid-template-columns: 80px 1fr;
-  gap: 0 1.5rem;
-  padding: 0.6rem 0;
-  border-top: 1px solid var(--rule);
-  font-size: 0.95rem;
-}
-
-.news-date {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--ink-faint);
-  padding-top: 0.1rem;
-  letter-spacing: 0.03em;
-}
-
-/* ============================================
-   CV PAGE
-   ============================================ */
-
-.page-header {
-  padding: 4rem 0 2.5rem;
-  border-bottom: 1px solid var(--rule);
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-
-.page-header h1 {
-  font-size: 2rem;
-  font-weight: 400;
-}
-
-.page-header p {
-  color: var(--ink-muted);
-  font-size: 1rem;
-  margin-top: 0.5rem;
-  max-width: 500px;
-}
-
-.download-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--accent);
-  letter-spacing: 0.03em;
-}
-
-.download-link:hover {
-  color: var(--accent-hover);
-}
-
-.download-link svg {
-  width: 14px;
-  height: 14px;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-/* ---- CV GRID ---- */
-.cv-section {
-  padding: 2.5rem 0;
-  border-bottom: 1px solid var(--rule);
-  display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 0 2rem;
-}
-
-.cv-section:last-of-type {
-  border-bottom: none;
-}
-
-.cv-section-label {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  padding-top: 0.15rem;
-}
-
-/* ---- CV ENTRIES ---- */
-.cv-entry {
-  margin-bottom: 1.6rem;
-}
-
-.cv-entry:last-child {
-  margin-bottom: 0;
-}
-
-.cv-entry-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 1rem;
-}
-
-.cv-entry-title {
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-.cv-entry-date {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--ink-faint);
-  white-space: nowrap;
-  letter-spacing: 0.03em;
-}
-
-.cv-entry-sub {
-  color: var(--ink-muted);
-  font-size: 0.95rem;
-  font-style: italic;
-}
-
-.cv-entry-detail {
-  color: var(--ink-muted);
-  font-size: 0.9rem;
-  margin-top: 0.2rem;
-}
-
-/* ---- PUBLICATIONS (CV) ---- */
-.pub-entry {
-  margin-bottom: 1.4rem;
-  padding-left: 1rem;
-  border-left: 2px solid var(--rule);
-}
-
-.pub-entry:last-child {
-  margin-bottom: 0;
-}
-
-.pub-title {
-  font-size: 1rem;
-}
-
-.pub-authors {
-  font-size: 0.9rem;
-  color: var(--ink-muted);
-  font-style: italic;
-}
-
-.pub-venue {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--ink-faint);
-  letter-spacing: 0.02em;
-}
-
-.pub-link {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--accent);
-}
-
-.pub-link:hover {
-  text-decoration: underline;
-}
-
-/* ---- SKILLS (CV) ---- */
-.skill-group {
-  margin-bottom: 0.8rem;
-  font-size: 0.95rem;
-}
-
-.skill-group:last-child {
-  margin-bottom: 0;
-}
-
-.skill-group-name {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--ink-faint);
-  display: inline-block;
-  width: 90px;
-}
-
-/* ============================================
-   PROJECTS PAGE
-   ============================================ */
-
-.project-list {
-  padding: 2.5rem 0;
-}
-
-.project {
-  padding: 2rem 0;
-  border-bottom: 1px solid var(--rule);
-}
-
-.project:first-child {
-  padding-top: 0;
-}
-
-.project:last-child {
-  border-bottom: none;
-}
-
-.project-meta {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  margin-bottom: 0.6rem;
-}
-
-.project-status {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 2px 8px;
-  border-radius: 2px;
-}
-
-.status-active {
-  background: #e8f0e8;
-  color: #3a6b3a;
-}
-
-.status-complete {
-  background: var(--paper-warm);
-  color: var(--ink-faint);
-}
-
-.project-year {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--ink-faint);
-  letter-spacing: 0.03em;
-}
-
-.project h2 {
-  font-size: 1.25rem;
-  font-weight: 500;
-  line-height: 1.3;
-  margin-bottom: 0.6rem;
-}
-
-.project-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-bottom: 0.8rem;
-}
-
-.tag {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--ink-faint);
-  border: 1px solid var(--rule);
-  padding: 1px 7px;
-  border-radius: 2px;
-  letter-spacing: 0.03em;
-}
-
-.project p {
-  color: var(--ink-muted);
-  font-size: 0.97rem;
-}
-
-.project-links {
-  display: flex;
-  gap: 1.2rem;
-  margin-top: 0.9rem;
-}
-
-.project-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--accent);
-  letter-spacing: 0.02em;
-}
-
-.project-link:hover {
-  color: var(--accent-hover);
-}
-
-.project-link svg {
-  width: 13px;
-  height: 13px;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-/* ============================================
-   RESPONSIVE
-   ============================================ */
-
-@media (max-width: 600px) {
-  .nav-name        { display: none; }
-  .hero            { padding: 3rem 0 2.5rem; }
-  .hero-inner      { flex-direction: column; gap: 1.5rem; }
-  .hero-text h1    { font-size: 1.9rem; }
-  .page-header     { flex-direction: column; gap: 1rem; align-items: flex-start; }
-  .cv-section      { grid-template-columns: 1fr; }
-  .cv-section-label{ margin-bottom: 0.8rem; }
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Name</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-name">your.name</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">about</a></li>
+    <li><a href="cv.html">cv</a></li>
+    <li><a href="projects.html">projects</a></li>
+  </ul>
+</nav>
+
+<main class="container">
+
+  <!-- ======== HERO ======== -->
+  <div class="hero">
+    <div class="hero-inner">
+
+      <div class="photo-wrap">
+        <!--
+          HOW TO ADD YOUR PHOTO:
+          1. Upload your photo to your GitHub repo (e.g. name it "photo.jpg")
+          2. Replace the src below with your filename
+        -->
+        <img
+          src="photo.jpg"
+          alt="Photo of Your Name"
+          class="photo"
+        />
+      </div>
+
+      <div class="hero-text">
+        <h1>Your Name</h1>
+        <p class="position">PhD Candidate &middot; Department of X &middot; University Name</p>
+        <p>
+          I study [your research area]. My work sits at the intersection of
+          [field A] and [field B], with a focus on [specific topic].
+          I am advised by <a href="#">Prof. Surname</a>.
+        </p>
+
+        <div class="contact-links">
+
+          <!-- EMAIL -->
+          <a href="mailto:you@university.edu" class="contact-link">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="M2 7l10 7 10-7"/>
+            </svg>
+            email
+          </a>
+
+          <!-- GITHUB -->
+          <a href="https://github.com/yourusername" class="contact-link" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+            </svg>
+            github
+          </a>
+
+          <!-- LINKEDIN -->
+          <a href="https://linkedin.com/in/yourprofile" class="contact-link" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+              <rect x="2" y="9" width="4" height="12"/>
+              <circle cx="4" cy="4" r="2"/>
+            </svg>
+            linkedin
+          </a>
+
+          <!-- CV -->
+          <a href="cv.html" class="contact-link">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+            </svg>
+            curriculum vitae
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== NEWS ======== -->
+  <section class="home-section">
+    <p class="section-label">recent news</p>
+    <ul class="news-list">
+      <li class="news-item">
+        <span class="news-date">May 2026</span>
+        <span>Paper accepted to [Conference Name]. See you in [City]!</span>
+      </li>
+      <li class="news-item">
+        <span class="news-date">Jan 2026</span>
+        <span>Started a research internship at [Organisation].</span>
+      </li>
+      <li class="news-item">
+        <span class="news-date">Sep 2025</span>
+        <span>Began PhD at [University]. Excited to get started.</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ======== SELECTED PUBLICATIONS ======== -->
+  <section class="home-section">
+    <p class="section-label">selected publications</p>
+    <p style="color:var(--ink-muted); font-size:0.95rem;">
+      Add highlights here. Full list on the <a href="cv.html">CV page</a>.
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  updated may 2026 &nbsp;&middot;&nbsp; built with github pages
+</footer>
+
+</body>
+</html>
