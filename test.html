@@ -3,74 +3,39 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Who Really Gets the Benefits? · Capture & Clientelism</title>
+<title>Who Really Gets the Benefits? · Capture &amp; Clientelism</title>
 <meta name="description" content="An interactive reading of Bardhan & Mookherjee (2023), 'Political clientelism and capture: theory and an application.'" />
-
-<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-
-<!-- React + Babel (CDN, no build step needed for GitHub Pages) -->
-<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
 <style>
   :root{
-    --ink:#0c1016;            /* deep ink background */
-    --ink-2:#11171f;          /* raised panel */
-    --ink-3:#161d27;
+    --ink:#0c1016; --ink-2:#11171f; --ink-3:#161d27;
     --line:rgba(255,255,255,.09);
-    --paper:#ece7df;          /* warm off-white text */
-    --paper-dim:#9aa3af;      /* muted */
-    --paper-faint:#5d6573;
-    --capture:#e6b15a;        /* brass/gold  -> capture / elite */
-    --capture-deep:#9c6b1f;
-    --client:#46c2b4;         /* teal        -> clientelism / machine */
-    --client-deep:#1f6f67;
-    --signal:#f2715a;         /* coral       -> SC/ST share (used sparingly) */
-    --signal-deep:#a83b2c;
+    --paper:#ece7df; --paper-dim:#9aa3af; --paper-faint:#5d6573;
+    --capture:#e6b15a; --client:#46c2b4; --signal:#f2715a;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{
-    margin:0;background:var(--ink);color:var(--paper);
-    font-family:"Inter",system-ui,sans-serif;
-    -webkit-font-smoothing:antialiased;line-height:1.6;
-    overflow-x:hidden;
-  }
-  /* faint atmospheric gradient */
-  body::before{
-    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  body{margin:0;background:var(--ink);color:var(--paper);
+    font-family:"Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;
+    line-height:1.6;overflow-x:hidden}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
     background:
       radial-gradient(1200px 700px at 78% -5%, rgba(230,177,90,.07), transparent 60%),
-      radial-gradient(1100px 800px at 12% 108%, rgba(70,194,180,.06), transparent 60%);
-  }
+      radial-gradient(1100px 800px at 12% 108%, rgba(70,194,180,.06), transparent 60%);}
   #root{position:relative;z-index:1}
-
   .mono{font-family:"Space Mono",monospace}
   .serif{font-family:"Fraunces",Georgia,serif}
-
-  .eyebrow{
-    font-family:"Space Mono",monospace;font-size:.72rem;letter-spacing:.22em;
-    text-transform:uppercase;color:var(--paper-faint);margin:0 0 1.1rem;
-  }
+  .eyebrow{font-family:"Space Mono",monospace;font-size:.72rem;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--paper-faint);margin:0 0 1.1rem}
   .eyebrow b{color:var(--capture);font-weight:700}
-
   h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-weight:600;line-height:1.04;
     letter-spacing:-.015em;margin:0}
-  .dek{font-family:"Fraunces",Georgia,serif;font-weight:400;font-style:italic;
-    color:var(--paper-dim);}
-
+  .dek{font-family:"Fraunces",Georgia,serif;font-weight:400;font-style:italic;color:var(--paper-dim)}
   a{color:var(--client)}
-
-  /* ---------- progress rail ---------- */
   .rail{position:fixed;top:0;left:0;height:3px;z-index:40;
-    background:linear-gradient(90deg,var(--client),var(--capture));
-    width:0;transition:width .15s linear}
-
-  /* ---------- hero ---------- */
+    background:linear-gradient(90deg,var(--client),var(--capture));width:0;transition:width .15s linear}
   .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;
     padding:6vh clamp(1.4rem,5vw,7rem) 0;max-width:1500px;margin:0 auto}
   .hero h1{font-size:clamp(2.9rem,8.5vw,8rem);font-weight:600}
@@ -82,64 +47,56 @@
     letter-spacing:.2em;text-transform:uppercase;margin-top:clamp(2.5rem,7vh,5rem);
     display:flex;align-items:center;gap:.7rem}
   .scrollcue .ln{width:46px;height:1px;background:var(--line);position:relative;overflow:hidden}
-  .scrollcue .ln::after{content:"";position:absolute;inset:0;width:18px;
-    background:var(--capture);animation:slide 2.2s infinite}
+  .scrollcue .ln::after{content:"";position:absolute;inset:0;width:18px;background:var(--capture);
+    animation:slide 2.2s infinite}
   @keyframes slide{from{transform:translateX(-20px)}to{transform:translateX(60px)}}
-
-  /* ---------- scrolly layout ---------- */
-  .scrolly{position:relative;max-width:1500px;margin:0 auto;
-    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);
-    gap:clamp(1rem,3vw,3rem);padding:0 clamp(1.4rem,5vw,7rem)}
+  .scrolly{position:relative;max-width:1500px;margin:0 auto;display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:clamp(1rem,3vw,3rem);
+    padding:0 clamp(1.4rem,5vw,7rem)}
   .col-text{padding:14vh 0}
-  .col-viz{position:sticky;top:0;height:100vh;
-    display:flex;align-items:center;justify-content:center}
+  .col-viz{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center}
+  .vw{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    opacity:0;transform:scale(.985);pointer-events:none;
+    transition:opacity .6s ease,transform .6s ease}
+  .vw.active{opacity:1;transform:none;pointer-events:auto}
   .viz-frame{width:100%;height:78vh;max-height:760px;position:relative;
     border:1px solid var(--line);border-radius:18px;overflow:hidden;
     background:linear-gradient(160deg,var(--ink-2),var(--ink));
     box-shadow:0 30px 80px -40px rgba(0,0,0,.8)}
-
-  .chapter{min-height:118vh;display:flex;flex-direction:column;justify-content:center;
-    padding:6vh 0}
+  .beam-wrap{position:absolute;inset:0;display:flex;align-items:center;padding:30px 8px 0}
+  .chapter{min-height:118vh;display:flex;flex-direction:column;justify-content:center;padding:6vh 0}
   .chapter.tall{min-height:150vh}
   .chapter .num{font-family:"Space Mono",monospace;font-size:.74rem;letter-spacing:.22em;
     color:var(--paper-faint);margin-bottom:1rem;text-transform:uppercase}
   .chapter h2{font-size:clamp(1.9rem,3.6vw,3.2rem);margin-bottom:1.1rem}
-  .chapter p{color:var(--paper-dim);font-size:clamp(1rem,1.25vw,1.18rem);
-    max-width:46ch;margin:0 0 1.05rem}
+  .chapter p{color:var(--paper-dim);font-size:clamp(1rem,1.25vw,1.18rem);max-width:46ch;margin:0 0 1.05rem}
   .chapter p strong{color:var(--paper);font-weight:600}
-  .chapter .accent-cap{color:var(--capture);font-weight:600}
-  .chapter .accent-cli{color:var(--client);font-weight:600}
-  .chapter .accent-sig{color:var(--signal);font-weight:600}
-
+  .accent-cap{color:var(--capture);font-weight:600}
+  .accent-cli{color:var(--client);font-weight:600}
+  .accent-sig{color:var(--signal);font-weight:600}
   .eqn{font-family:"Space Mono",monospace;font-size:.92rem;color:var(--paper);
     background:var(--ink-3);border:1px solid var(--line);border-left:3px solid var(--capture);
-    border-radius:10px;padding:.9rem 1.1rem;margin:1.4rem 0;line-height:1.9;
-    max-width:46ch;overflow-x:auto}
+    border-radius:10px;padding:.9rem 1.1rem;margin:1.4rem 0;line-height:1.9;max-width:46ch;overflow-x:auto}
   .eqn .lbl{color:var(--paper-faint)}
-
   .facts{list-style:none;padding:0;margin:1.2rem 0 0;max-width:46ch}
   .facts li{border-top:1px solid var(--line);padding:1rem 0;display:grid;
     grid-template-columns:auto 1fr;gap:.9rem;align-items:start}
   .facts li .tag{font-family:"Space Mono",monospace;font-size:.7rem;letter-spacing:.1em;
     color:var(--paper-faint);padding-top:.25rem;white-space:nowrap}
-  .facts li .arr{font-weight:700;font-family:"Space Mono",monospace}
-  .up{color:var(--client)} .down{color:var(--signal)}
   .facts li p{margin:0;color:var(--paper-dim);font-size:.98rem}
-
-  /* interactive controls */
+  .arr{font-weight:700;font-family:"Space Mono",monospace}
+  .up{color:var(--client)} .down{color:var(--signal)}
   .controls{max-width:46ch;margin-top:1.6rem;display:grid;gap:1.15rem}
   .ctrl label{display:flex;justify-content:space-between;align-items:baseline;
-    font-family:"Space Mono",monospace;font-size:.78rem;letter-spacing:.08em;
-    margin-bottom:.5rem}
+    font-family:"Space Mono",monospace;font-size:.78rem;letter-spacing:.08em;margin-bottom:.5rem}
   .ctrl .val{font-weight:700}
   .ctrl.cap .val{color:var(--capture)}
   .ctrl.cli .val{color:var(--client)}
-  input[type=range]{-webkit-appearance:none;width:100%;height:4px;border-radius:4px;
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:4px;
     background:var(--ink-3);outline:none}
-  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;
-    border-radius:50%;cursor:pointer;border:3px solid var(--ink);box-shadow:0 0 0 1px var(--line)}
-  input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;cursor:pointer;
-    border:3px solid var(--ink)}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;
+    cursor:pointer;border:3px solid var(--ink);box-shadow:0 0 0 1px var(--line)}
+  input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;cursor:pointer;border:3px solid var(--ink)}
   .ctrl.cap input[type=range]::-webkit-slider-thumb{background:var(--capture)}
   .ctrl.cli input[type=range]::-webkit-slider-thumb{background:var(--client)}
   .ctrl.cap input[type=range]::-moz-range-thumb{background:var(--capture)}
@@ -147,48 +104,41 @@
   .ctrl input:focus-visible{box-shadow:0 0 0 3px rgba(255,255,255,.18)}
   .note{font-family:"Space Mono",monospace;font-size:.7rem;color:var(--paper-faint);
     line-height:1.6;max-width:46ch;margin-top:1.3rem}
-
-  /* viz internal text */
-  .viz-cap{position:absolute;left:18px;bottom:14px;right:18px;
-    font-family:"Space Mono",monospace;font-size:.68rem;color:var(--paper-faint);
-    letter-spacing:.04em;line-height:1.5}
-  .viz-title{position:absolute;left:20px;top:18px;font-family:"Space Mono",monospace;
-    font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--paper-faint)}
-
-  /* outro */
-  .outro{max-width:760px;margin:0 auto;padding:18vh clamp(1.4rem,5vw,7rem) 16vh;
-    text-align:left}
+  .viz-cap{position:absolute;left:18px;bottom:14px;right:18px;font-family:"Space Mono",monospace;
+    font-size:.68rem;color:var(--paper-faint);letter-spacing:.04em;line-height:1.5}
+  .viz-title{position:absolute;left:20px;top:18px;font-family:"Space Mono",monospace;font-size:.7rem;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--paper-faint);right:20px}
+  .tw-btns{position:absolute;top:14px;right:16px;z-index:3;display:flex;gap:6px}
+  .tw-btns button{font:700 .66rem "Space Mono",monospace;letter-spacing:.06em;cursor:pointer;
+    padding:.4rem .6rem;border-radius:7px;border:1px solid var(--line);background:transparent;color:var(--paper-faint)}
+  .tw-btns button.on{background:var(--ink-3);color:var(--paper)}
+  .tw-chart{position:absolute;inset:0;opacity:0;transition:opacity .4s;pointer-events:none}
+  .tw-chart.show{opacity:1;pointer-events:auto}
+  .outro{max-width:760px;margin:0 auto;padding:18vh clamp(1.4rem,5vw,7rem) 16vh}
   .outro h2{font-size:clamp(1.8rem,3.4vw,2.8rem);margin-bottom:1.4rem}
   .outro p{color:var(--paper-dim);font-size:1.08rem;max-width:60ch;margin:0 0 1.1rem}
   .outro .ref{font-family:"Space Mono",monospace;font-size:.76rem;color:var(--paper-faint);
-    border-top:1px solid var(--line);padding-top:1.6rem;margin-top:2.4rem;line-height:1.8}
-
-  /* fade-in */
+    border-top:1px solid var(--line);padding-top:1.6rem;margin-top:2.4rem;line-height:1.8;word-break:break-word}
   .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
   .reveal.in{opacity:1;transform:none}
-
-  /* mobile */
   @media (max-width:880px){
     .scrolly{grid-template-columns:1fr;gap:0}
-    .col-viz{position:sticky;top:0;height:auto;z-index:5;
-      padding:.6rem 0;background:linear-gradient(to bottom,var(--ink) 80%,transparent)}
-    .viz-frame{height:42vh;max-height:none;border-radius:14px}
-    .col-text{padding:0 0 12vh}
-    .chapter{min-height:auto;padding:9vh 0 3vh}
+    .col-viz{position:sticky;top:0;height:46vh;z-index:5;
+      background:linear-gradient(to bottom,var(--ink) 86%,transparent)}
+    .viz-frame{height:100%;max-height:none;border-radius:14px}
+    .col-text{padding:3vh 0 12vh}
+    .chapter{min-height:auto;padding:8vh 0 3vh}
     .chapter.tall{min-height:auto}
     .chapter p,.eqn,.facts,.controls,.note{max-width:none}
     .order-viz{order:-1}
   }
-
   @media (prefers-reduced-motion:reduce){
     *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
     .reveal{opacity:1;transform:none}
+    .vw.active{opacity:1}
   }
-
-  /* loading */
-  #loader{position:fixed;inset:0;z-index:100;background:var(--ink);
-    display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.4rem;
-    transition:opacity .6s ease}
+  #loader{position:fixed;inset:0;z-index:100;background:var(--ink);display:flex;align-items:center;
+    justify-content:center;flex-direction:column;gap:1.4rem;transition:opacity .6s ease}
   #loader.gone{opacity:0;pointer-events:none}
   #loader .lt{font-family:"Space Mono",monospace;font-size:.74rem;letter-spacing:.24em;
     text-transform:uppercase;color:var(--paper-faint)}
@@ -201,602 +151,375 @@
 <body>
   <div id="loader"><div class="lt">Allocating the benefits…</div><div class="bar"><i></i></div></div>
   <div class="rail" id="rail"></div>
+  <noscript style="display:block;padding:2rem;color:#ece7df;font-family:sans-serif">
+    This interactive piece needs JavaScript enabled.</noscript>
   <div id="root"></div>
 
-<script type="text/babel" data-presets="react">
-const {useState,useEffect,useRef,useMemo} = React;
-
-/* ============================================================
-   DATA — extracted only from Bardhan & Mookherjee (2023).
-   Empirical numbers come from footnote 12 (Ruud, 1999).
-   Directional results come from the Corollaries & Propositions.
-   ============================================================ */
-const C = { capture:"var(--capture)", client:"var(--client)", signal:"var(--signal)",
-            dim:"var(--paper-dim)", faint:"var(--paper-faint)", paper:"var(--paper)",
-            ink2:"var(--ink-2)", ink3:"var(--ink-3)", line:"var(--line)" };
-
-// Illustrative group ladder (poorest -> elite). Population shares are schematic.
-const GROUPS = [
-  {key:"scst",  label:"SC/ST",   pop:0.30, sig:true },
-  {key:"low",   label:"Low",     pop:0.24 },
-  {key:"mid",   label:"Middle",  pop:0.20 },
-  {key:"upper", label:"Upper",   pop:0.16 },
-  {key:"elite", label:"Elite",   pop:0.10, elite:true },
-];
-
-// Ruud (1999), Bardhaman district — footnote 12. Real figures from the paper.
-const RUUD_CAPTURE = [
-  {group:"Bagdis (SC)",  pop:7.6, benefit:23.5, fav:true },   // "23–24%", pop 7.6%
-  {group:"Muchis (SC)",  pop:5.0, benefit:6.0 },              // "5–7%", pop ~5%
-  {group:"Santals (ST)", pop:5.0, benefit:6.0 },              // "5–7%", pop ~5%
-];
-const RUUD_LAND = [
-  {group:"Aguris",  y1960:47, y1993:29 },
-  {group:"Bagdis",  y1960:14, y1993:29, rising:true },
-  {group:"Muchis",  y1960:3,  y1993:3 },
-];
-
-const FACTS = [
-  {tag:"FACT 1", dir:"down", txt:"Lower SC/ST share where land inequality or SC/ST landlessness was higher."},
-  {tag:"FACT 2", dir:"down", txt:"SC/ST share fell when the pradhan post was reserved for a woman (or a woman–SC/ST candidate)."},
-  {tag:"FACT 3", dir:"up",   txt:"SC/ST share rose when the post was reserved for an SC candidate."},
-  {tag:"FACT 4", dir:"flat", txt:"The drop from women's reservations was muted in high-inequality villages."},
-];
-
-const SECTIONS = [
-  {id:"setup",  num:"01 · The setup",      title:"Every democracy leaks", viz:"forces"},
-  {id:"capture",num:"02 · Force one",      title:"Capture pulls the money up", viz:"capture"},
-  {id:"client", num:"03 · Force two",      title:"Clientelism pulls it toward loyal voters", viz:"client"},
-  {id:"model",  num:"04 · The engine",     title:"Three dials behind every allocation", viz:"model"},
-  {id:"tug",    num:"05 · Comparative statics", title:"Pull the two dials yourself", viz:"tug", tall:true},
-  {id:"puzzle", num:"06 · The evidence",   title:"Four facts that shouldn't fit together", viz:"facts"},
-  {id:"solve",  num:"07 · The resolution", title:"Only both forces explain all four", viz:"solve"},
-  {id:"twist",  num:"08 · The lesson",     title:"More targeting isn't always more justice", viz:"twist", tall:true},
-];
-
-/* ---------- scroll hooks ---------- */
-function useActiveSection(ids){
-  const [active,setActive] = useState(ids[0]);
-  useEffect(()=>{
-    const obs = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting) setActive(e.target.dataset.id); });
-    },{rootMargin:"-45% 0px -45% 0px",threshold:0});
-    ids.forEach(id=>{const el=document.getElementById("ch-"+id); if(el)obs.observe(el);});
-    return ()=>obs.disconnect();
-  },[ids.join()]);
-  return active;
-}
-function useReveal(){
-  useEffect(()=>{
-    const obs=new IntersectionObserver((es)=>es.forEach(e=>{
-      if(e.isIntersecting){e.target.classList.add("in");obs.unobserve(e.target);}
-    }),{threshold:.2});
-    document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
-    return ()=>obs.disconnect();
-  },[]);
-}
-
-/* ============================================================
-   SHARED VISUAL — the allocation beam
-   ============================================================ */
-function colorFor(g){
-  if(g.elite) return C.capture;
-  if(g.sig)   return C.signal;
-  return "rgba(236,231,223,.55)";
-}
-function AllocationBeam({shares, highlightElite, highlightSig, w=560, h=300}){
-  const pad=46, base=h-58, top=40;
-  const max=Math.max(...shares), span=w-pad*2;
-  const bw=span/GROUPS.length*0.62, gap=span/GROUPS.length;
-  return (
-    <svg viewBox={`0 0 ${w} ${h}`} width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
-      <line x1={pad-14} y1={base} x2={w-pad+14} y2={base} stroke="var(--line)" strokeWidth="1"/>
-      {GROUPS.map((g,i)=>{
-        const val=shares[i];
-        const bh=(val/Math.max(max,1))*(base-top);
-        const x=pad+gap*i+(gap-bw)/2;
-        const y=base-bh;
-        const col=colorFor(g);
-        const glow=(g.elite&&highlightElite)||(g.sig&&highlightSig);
-        return (
-          <g key={g.key} style={{transition:"all .9s cubic-bezier(.22,1,.36,1)"}}>
-            <rect x={x} y={y} width={bw} height={bh} rx="4" fill={col}
-              opacity={glow?1:0.92}
-              style={{filter:glow?`drop-shadow(0 0 14px ${col})`:"none",
-                      transition:"all .9s cubic-bezier(.22,1,.36,1)"}}/>
-            <text x={x+bw/2} y={base+18} textAnchor="middle"
-              fontFamily="Space Mono" fontSize="10" letterSpacing=".05em"
-              fill={g.elite?C.capture:g.sig?C.signal:"var(--paper-faint)"}>{g.label}</text>
-            <text x={x+bw/2} y={y-8} textAnchor="middle"
-              fontFamily="Space Mono" fontSize="11" fontWeight="700"
-              fill="var(--paper)" opacity={bh>14?1:0}
-              style={{transition:"all .6s"}}>{Math.round(val*100)}%</text>
-          </g>
-        );
-      })}
-      <text x={pad-14} y={top-14} fontFamily="Space Mono" fontSize="9.5"
-        letterSpacing=".12em" fill="var(--paper-faint)">SHARE OF BENEFITS  →  POOREST … ELITE</text>
-    </svg>
-  );
-}
-
-/* ---------- baseline shares ---------- */
-function computeShares(h,z){
-  // h = capture (0..1) raises the elite weight  (Corollary i)
-  // z = uniform clientelism (0..1) raises every non-elite weight (Corollary ii)
-  const w = GROUPS.map(g=>{
-    if(g.elite) return 1 + 4.0*h;
-    return 1 + 2.6*z;
-  });
-  const raw = GROUPS.map((g,i)=>w[i]*g.pop);
-  const tot = raw.reduce((a,b)=>a+b,0);
-  return raw.map(v=>v/tot);
-}
-
-/* ============================================================
-   VISUALIZATIONS
-   ============================================================ */
-function VizForces({on}){
-  return (
-    <div className="viz-frame">
-      <div className="viz-title">The two forces</div>
-      <svg viewBox="0 0 560 360" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
-        {/* the benefit pool */}
-        <ellipse cx="280" cy="250" rx="120" ry="26" fill="var(--ink-3)" stroke="var(--line)"/>
-        <text x="280" y="300" textAnchor="middle" fontFamily="Space Mono" fontSize="11"
-          letterSpacing=".12em" fill="var(--paper-faint)">PUBLIC BENEFITS</text>
-        {/* left: clientelism */}
-        <g style={{transition:"all 1s",opacity:on?1:.25,transform:on?"none":"translateX(-18px)"}}>
-          <circle cx="92" cy="120" r="44" fill="none" stroke="var(--client)" strokeWidth="1.4"/>
-          <circle cx="92" cy="120" r="6" fill="var(--client)">
-            <animate attributeName="r" values="6;9;6" dur="2.4s" repeatCount="indefinite"/>
-          </circle>
-          <text x="92" y="58" textAnchor="middle" className="serif" fontSize="18" fill="var(--paper)">Clientelism</text>
-          <path d="M120 150 Q200 210 250 238" fill="none" stroke="var(--client)" strokeWidth="1.4"
-            strokeDasharray="4 5" opacity=".8"/>
-        </g>
-        {/* right: capture */}
-        <g style={{transition:"all 1s",opacity:on?1:.25,transform:on?"none":"translateX(18px)"}}>
-          <circle cx="468" cy="120" r="44" fill="none" stroke="var(--capture)" strokeWidth="1.4"/>
-          <circle cx="468" cy="120" r="6" fill="var(--capture)">
-            <animate attributeName="r" values="6;9;6" dur="2.4s" begin="1.2s" repeatCount="indefinite"/>
-          </circle>
-          <text x="468" y="58" textAnchor="middle" className="serif" fontSize="18" fill="var(--paper)">Capture</text>
-          <path d="M440 150 Q360 210 310 238" fill="none" stroke="var(--capture)" strokeWidth="1.4"
-            strokeDasharray="4 5" opacity=".8"/>
-        </g>
-      </svg>
-      <div className="viz-cap">Studied apart for decades. This paper puts them in the same room.</div>
-    </div>
-  );
-}
-
-function VizBeamState({h,z,title,cap,highlightElite,highlightSig}){
-  const shares=useMemo(()=>computeShares(h,z),[h,z]);
-  return (
-    <div className="viz-frame">
-      <div className="viz-title">{title}</div>
-      <div style={{position:"absolute",inset:"0",display:"flex",alignItems:"center",padding:"30px 8px 0"}}>
-        <AllocationBeam shares={shares} highlightElite={highlightElite} highlightSig={highlightSig}/>
-      </div>
-      <div className="viz-cap">{cap}</div>
-    </div>
-  );
-}
-
-function VizModel({on}){
-  // welfare-weight ladder
-  const rows=[
-    {l:"σ — swing",      c:"var(--paper-dim)", w:.55},
-    {l:"z — clientelism",c:"var(--client)",    w:.7},
-    {l:"h — capture",    c:"var(--capture)",   w:.45},
+<script>
+"use strict";
+(function(){
+  /* ===== DATA (from Bardhan & Mookherjee 2023; Ruud 1999 via footnote 12) ===== */
+  var GROUPS=[
+    {key:"scst", label:"SC/ST",  pop:0.30, sig:true},
+    {key:"low",  label:"Low",    pop:0.24},
+    {key:"mid",  label:"Middle", pop:0.20},
+    {key:"upper",label:"Upper",  pop:0.16},
+    {key:"elite",label:"Elite",  pop:0.10, elite:true}
   ];
-  return (
-    <div className="viz-frame">
-      <div className="viz-title">Political welfare weight  δᵢ</div>
-      <svg viewBox="0 0 560 360" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
-        {rows.map((r,i)=>(
-          <g key={i} style={{transition:"all .9s",opacity:on?1:0,transform:on?"none":"translateY(14px)",transitionDelay:(i*.12)+"s"}}>
-            <text x="40" y={120+i*64} fontFamily="Space Mono" fontSize="12" fill={r.c}>{r.l}</text>
-            <rect x="40" y={130+i*64} width="380" height="10" rx="5" fill="var(--ink-3)"/>
-            <rect x="40" y={130+i*64} width={380*r.w} height="10" rx="5" fill={r.c}
-              style={{transition:"width 1.1s cubic-bezier(.22,1,.36,1)",transitionDelay:(.2+i*.12)+"s",
-                      width:on?380*r.w:0}}/>
-          </g>
-        ))}
-        {/* elite extra push */}
-        <g style={{transition:"all .9s",opacity:on?1:0,transitionDelay:".5s"}}>
-          <line x1="40" y1="300" x2="520" y2="300" stroke="var(--line)"/>
-          <text x="40" y="328" fontFamily="Space Mono" fontSize="11" fill="var(--paper-faint)">
-            Only the elite gets the extra capture term  + h·γ̂</text>
-          <circle cx="470" cy="324" r="5" fill="var(--capture)"/>
-        </g>
-      </svg>
-      <div className="viz-cap">Every distortion collapses into one number per group.</div>
-    </div>
-  );
-}
+  function computeShares(h,z){
+    var w=GROUPS.map(function(g){return g.elite?(1+4.0*h):(1+2.6*z);});
+    var raw=GROUPS.map(function(g,i){return w[i]*g.pop;});
+    var tot=raw.reduce(function(a,b){return a+b;},0);
+    return raw.map(function(v){return v/tot;});
+  }
+  var SECTIONS=[
+    {id:"setup",  num:"01 · The setup",          title:"Every democracy leaks", viz:"forces"},
+    {id:"capture",num:"02 · Force one",          title:"Capture pulls the money up", viz:"beamCap"},
+    {id:"client", num:"03 · Force two",          title:"Clientelism pulls it toward loyal voters", viz:"beamCli"},
+    {id:"model",  num:"04 · The engine",         title:"Three dials behind every allocation", viz:"model"},
+    {id:"tug",    num:"05 · Comparative statics", title:"Pull the two dials yourself", viz:"tug", tall:true},
+    {id:"puzzle", num:"06 · The evidence",       title:"Four facts that shouldn't fit together", viz:"facts"},
+    {id:"solve",  num:"07 · The resolution",     title:"Only both forces explain all four", viz:"solve"},
+    {id:"twist",  num:"08 · The lesson",         title:"More targeting isn't always more justice", viz:"twist", tall:true}
+  ];
+  var FACTS=[
+    {tag:"FACT 1",dir:"down",txt:"Lower SC/ST share where land inequality or SC/ST landlessness was higher."},
+    {tag:"FACT 2",dir:"down",txt:"SC/ST share fell when the pradhan post was reserved for a woman (or a woman–SC/ST candidate)."},
+    {tag:"FACT 3",dir:"up",  txt:"SC/ST share rose when the post was reserved for an SC candidate."},
+    {tag:"FACT 4",dir:"flat",txt:"The drop from women's reservations was muted in high-inequality villages."}
+  ];
 
-function VizFacts({on}){
-  return (
-    <div className="viz-frame">
-      <div className="viz-title">SC/ST benefit share · West Bengal 1998–2004</div>
-      <svg viewBox="0 0 560 360" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
-        {[
-          {y:78, lab:"More land inequality",   d:-1, k:0},
-          {y:150,lab:"Woman pradhan reserved", d:-1, k:1},
-          {y:222,lab:"SC pradhan reserved",    d:+1, k:2},
-          {y:294,lab:"Woman × high inequality",d:0,  k:3},
-        ].map(r=>(
-          <g key={r.k} style={{transition:"all .8s",opacity:on?1:0,transform:on?"none":"translateX(20px)",transitionDelay:(r.k*.12)+"s"}}>
-            <text x="40" y={r.y+4} fontFamily="Space Mono" fontSize="11.5" fill="var(--paper-dim)">{r.lab}</text>
-            <line x1="330" y1={r.y} x2="430" y2={r.y} stroke="var(--line)"/>
-            {r.d!==0 ? (
-              <g>
-                <path d={r.d<0?`M430 ${r.y} l0 26 m-7 -8 l7 8 l7 -8`:`M430 ${r.y} l0 -26 m-7 8 l7 -8 l7 8`}
-                  stroke={r.d<0?"var(--signal)":"var(--client)"} strokeWidth="2" fill="none"/>
-                <text x="448" y={r.y+5} fontFamily="Space Mono" fontSize="11" fontWeight="700"
-                  fill={r.d<0?"var(--signal)":"var(--client)"}>{r.d<0?"falls":"rises"}</text>
-              </g>
-            ):(
-              <g><line x1="430" y1={r.y} x2="456" y2={r.y} stroke="var(--paper-faint)" strokeWidth="2" strokeDasharray="3 3"/>
-                <text x="464" y={r.y+5} fontFamily="Space Mono" fontSize="11" fill="var(--paper-faint)">muted</text></g>
-            )}
-          </g>
-        ))}
-      </svg>
-      <div className="viz-cap">No standard model predicts all four at once.</div>
-    </div>
-  );
-}
+  /* ===== small helpers ===== */
+  var SVGNS="http://www.w3.org/2000/svg";
+  function el(tag,attrs,html){var e=document.createElement(tag);if(attrs)for(var k in attrs)e.setAttribute(k,attrs[k]);if(html!=null)e.innerHTML=html;return e;}
 
-function VizSolve({on}){
-  return (
-    <div className="viz-frame">
-      <div className="viz-title">Reservation → mechanism → SC/ST share</div>
-      <svg viewBox="0 0 560 360" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
-        {/* women branch */}
-        <g style={{transition:"all .9s",opacity:on?1:0,transform:on?"none":"translateY(12px)"}}>
-          <text x="40" y="80" className="serif" fontSize="16" fill="var(--paper)">Woman pradhan</text>
-          <text x="40" y="104" fontFamily="Space Mono" fontSize="11" fill="var(--client)">z ↓↓  weak machine</text>
-          <text x="40" y="122" fontFamily="Space Mono" fontSize="11" fill="var(--capture)">h ↓   weak capture</text>
-          <path d="M250 100 H430" stroke="var(--line)"/>
-          <text x="440" y="96" fontFamily="Space Mono" fontSize="12" fontWeight="700" fill="var(--signal)">SC/ST ↓</text>
-          <text x="440" y="114" fontFamily="Space Mono" fontSize="9.5" fill="var(--paper-faint)">clientelism wins</text>
-        </g>
-        <line x1="40" y1="170" x2="520" y2="170" stroke="var(--line)" strokeDasharray="3 4" opacity=".5"
-          style={{transition:"all .9s",opacity:on?.5:0}}/>
-        {/* SC branch */}
-        <g style={{transition:"all .9s",opacity:on?1:0,transform:on?"none":"translateY(12px)",transitionDelay:".18s"}}>
-          <text x="40" y="232" className="serif" fontSize="16" fill="var(--paper)">SC pradhan</text>
-          <text x="40" y="256" fontFamily="Space Mono" fontSize="11" fill="var(--client)">z(SC) ↑  tighter on own group</text>
-          <text x="40" y="274" fontFamily="Space Mono" fontSize="11" fill="var(--capture)">h ↓   less capture</text>
-          <path d="M250 252 H430" stroke="var(--line)"/>
-          <text x="440" y="248" fontFamily="Space Mono" fontSize="12" fontWeight="700" fill="var(--client)">SC/ST ↑</text>
-          <text x="440" y="266" fontFamily="Space Mono" fontSize="9.5" fill="var(--paper-faint)">Corollary (iii)</text>
-        </g>
-        <text x="40" y="330" fontFamily="Space Mono" fontSize="10.5" fill="var(--paper-faint)"
-          style={{transition:"all .9s",opacity:on?1:0,transitionDelay:".34s"}}>
-          Neither force alone reproduces both rows.</text>
-      </svg>
-      <div className="viz-cap">The contradiction dissolves only when the two forces interact.</div>
-    </div>
-  );
-}
+  /* ===== beam (interactive bar chart) ===== */
+  function makeBeam(){
+    var W=560,H=300,pad=46,base=H-58,top=40;
+    var span=W-pad*2, gap=span/GROUPS.length, bw=gap*0.62;
+    var svg=document.createElementNS(SVGNS,"svg");
+    svg.setAttribute("viewBox","0 0 "+W+" "+H);
+    svg.setAttribute("width","100%");svg.setAttribute("height","100%");
+    svg.setAttribute("preserveAspectRatio","xMidYMid meet");
+    var bl=document.createElementNS(SVGNS,"line");
+    bl.setAttribute("x1",pad-14);bl.setAttribute("y1",base);bl.setAttribute("x2",W-pad+14);bl.setAttribute("y2",base);
+    bl.setAttribute("stroke","var(--line)");svg.appendChild(bl);
+    var cap=document.createElementNS(SVGNS,"text");
+    cap.setAttribute("x",pad-14);cap.setAttribute("y",top-14);cap.setAttribute("font-family","Space Mono");
+    cap.setAttribute("font-size","9.5");cap.setAttribute("letter-spacing",".12em");cap.setAttribute("fill","var(--paper-faint)");
+    cap.textContent="SHARE OF BENEFITS  →  POOREST … ELITE";svg.appendChild(cap);
+    var bars=[],labels=[];
+    GROUPS.forEach(function(g,i){
+      var x=pad+gap*i+(gap-bw)/2;
+      var col=g.elite?"var(--capture)":g.sig?"var(--signal)":"rgba(236,231,223,.55)";
+      var rect=document.createElementNS(SVGNS,"rect");
+      rect.setAttribute("x",x);rect.setAttribute("y",top);rect.setAttribute("width",bw);
+      rect.setAttribute("height",base-top);rect.setAttribute("rx","4");rect.setAttribute("fill",col);
+      rect.style.transformBox="fill-box";rect.style.transformOrigin="center bottom";
+      rect.style.transform="scaleY(0)";rect.style.transition="transform .9s cubic-bezier(.22,1,.36,1), filter .5s";
+      svg.appendChild(rect);bars.push(rect);
+      var gl=document.createElementNS(SVGNS,"text");
+      gl.setAttribute("x",x+bw/2);gl.setAttribute("y",base+18);gl.setAttribute("text-anchor","middle");
+      gl.setAttribute("font-family","Space Mono");gl.setAttribute("font-size","10");
+      gl.setAttribute("fill",g.elite?"var(--capture)":g.sig?"var(--signal)":"var(--paper-faint)");
+      gl.textContent=g.label;svg.appendChild(gl);
+      var vl=document.createElementNS(SVGNS,"text");
+      vl.setAttribute("x",x+bw/2);vl.setAttribute("y",base-8);vl.setAttribute("text-anchor","middle");
+      vl.setAttribute("font-family","Space Mono");vl.setAttribute("font-size","11");vl.setAttribute("font-weight","700");
+      vl.setAttribute("fill","var(--paper)");vl.style.transition="opacity .5s, y .9s";vl.style.opacity="0";
+      svg.appendChild(vl);labels.push(vl);
+    });
+    function set(shares,he,hs){
+      var max=Math.max.apply(null,shares.concat([0.01]));
+      shares.forEach(function(v,i){
+        var sc=v/max, g=GROUPS[i];
+        bars[i].style.transform="scaleY("+sc+")";
+        var glow=(g.elite&&he)||(g.sig&&hs);
+        var col=g.elite?"var(--capture)":g.sig?"var(--signal)":"rgba(236,231,223,.55)";
+        bars[i].style.filter=glow?("drop-shadow(0 0 12px "+col+")"):"none";
+        var barH=(base-top)*sc, ly=base-barH-8;
+        labels[i].setAttribute("y",ly>top?ly:top);
+        labels[i].textContent=Math.round(v*100)+"%";
+        labels[i].style.opacity=barH>14?1:0;
+      });
+    }
+    return {node:svg,set:set};
+  }
 
-function VizTwist({on}){
-  const [view,setView]=useState("capture"); // capture | land
-  const W=560,H=360;
-  return (
-    <div className="viz-frame">
-      <div className="viz-title">Ruud (1999) · two Bardhaman villages</div>
-      <div style={{position:"absolute",top:14,right:16,zIndex:3,display:"flex",gap:6}}>
-        {[["capture","Who got benefits"],["land","Land, 1960→1993"]].map(([k,l])=>(
-          <button key={k} onClick={()=>setView(k)}
-            style={{font:"700 .66rem 'Space Mono'",letterSpacing:".06em",cursor:"pointer",
-              padding:".4rem .6rem",borderRadius:7,border:"1px solid var(--line)",
-              background:view===k?"var(--ink-3)":"transparent",
-              color:view===k?"var(--paper)":"var(--paper-faint)"}}>{l}</button>
-        ))}
-      </div>
+  /* ===== static SVG vizzes ===== */
+  function frame(title,inner,capText){
+    var f=el("div",{"class":"viz-frame"});
+    f.appendChild(el("div",{"class":"viz-title"},title));
+    if(typeof inner==="string"){var w=el("div");w.style.position="absolute";w.style.inset="0";w.innerHTML=inner;f.appendChild(w);}
+    else f.appendChild(inner);
+    f.appendChild(el("div",{"class":"viz-cap"},capText));
+    return f;
+  }
+  function svgForces(){
+    return '<svg viewBox="0 0 560 360" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">'
+    +'<ellipse cx="280" cy="250" rx="120" ry="26" fill="var(--ink-3)" stroke="var(--line)"/>'
+    +'<text x="280" y="300" text-anchor="middle" font-family="Space Mono" font-size="11" letter-spacing=".12em" fill="var(--paper-faint)">PUBLIC BENEFITS</text>'
+    +'<circle cx="92" cy="120" r="44" fill="none" stroke="var(--client)" stroke-width="1.4"/>'
+    +'<circle cx="92" cy="120" r="6" fill="var(--client)"><animate attributeName="r" values="6;9;6" dur="2.4s" repeatCount="indefinite"/></circle>'
+    +'<text x="92" y="58" text-anchor="middle" font-family="Fraunces" font-size="18" fill="var(--paper)">Clientelism</text>'
+    +'<path d="M120 150 Q200 210 250 238" fill="none" stroke="var(--client)" stroke-width="1.4" stroke-dasharray="4 5" opacity=".8"/>'
+    +'<circle cx="468" cy="120" r="44" fill="none" stroke="var(--capture)" stroke-width="1.4"/>'
+    +'<circle cx="468" cy="120" r="6" fill="var(--capture)"><animate attributeName="r" values="6;9;6" dur="2.4s" begin="1.2s" repeatCount="indefinite"/></circle>'
+    +'<text x="468" y="58" text-anchor="middle" font-family="Fraunces" font-size="18" fill="var(--paper)">Capture</text>'
+    +'<path d="M440 150 Q360 210 310 238" fill="none" stroke="var(--capture)" stroke-width="1.4" stroke-dasharray="4 5" opacity=".8"/>'
+    +'</svg>';
+  }
+  function svgModel(){
+    var rows=[["σ — swing","var(--paper-dim)",.55],["z — clientelism","var(--client)",.7],["h — capture","var(--capture)",.45]];
+    var s='<svg viewBox="0 0 560 360" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">';
+    rows.forEach(function(r,i){
+      var y=120+i*64;
+      s+='<text x="40" y="'+y+'" font-family="Space Mono" font-size="12" fill="'+r[1]+'">'+r[0]+'</text>';
+      s+='<rect x="40" y="'+(y+10)+'" width="380" height="10" rx="5" fill="var(--ink-3)"/>';
+      s+='<rect x="40" y="'+(y+10)+'" width="'+(380*r[2])+'" height="10" rx="5" fill="'+r[1]+'"/>';
+    });
+    s+='<line x1="40" y1="300" x2="520" y2="300" stroke="var(--line)"/>';
+    s+='<text x="40" y="328" font-family="Space Mono" font-size="11" fill="var(--paper-faint)">Only the elite gets the extra capture term  + h·γ̂</text>';
+    s+='<circle cx="470" cy="324" r="5" fill="var(--capture)"/></svg>';
+    return s;
+  }
+  function svgFacts(){
+    var rows=[[78,"More land inequality",-1],[150,"Woman pradhan reserved",-1],[222,"SC pradhan reserved",1],[294,"Woman × high inequality",0]];
+    var s='<svg viewBox="0 0 560 360" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">';
+    rows.forEach(function(r){
+      var y=r[0],lab=r[1],d=r[2];
+      s+='<text x="40" y="'+(y+4)+'" font-family="Space Mono" font-size="11.5" fill="var(--paper-dim)">'+lab+'</text>';
+      s+='<line x1="330" y1="'+y+'" x2="430" y2="'+y+'" stroke="var(--line)"/>';
+      if(d!==0){
+        var c=d<0?"var(--signal)":"var(--client)";
+        var path=d<0?('M430 '+y+' l0 26 m-7 -8 l7 8 l7 -8'):('M430 '+y+' l0 -26 m-7 8 l7 -8 l7 8');
+        s+='<path d="'+path+'" stroke="'+c+'" stroke-width="2" fill="none"/>';
+        s+='<text x="448" y="'+(y+5)+'" font-family="Space Mono" font-size="11" font-weight="700" fill="'+c+'">'+(d<0?"falls":"rises")+'</text>';
+      }else{
+        s+='<line x1="430" y1="'+y+'" x2="456" y2="'+y+'" stroke="var(--paper-faint)" stroke-width="2" stroke-dasharray="3 3"/>';
+        s+='<text x="464" y="'+(y+5)+'" font-family="Space Mono" font-size="11" fill="var(--paper-faint)">muted</text>';
+      }
+    });
+    s+='</svg>';return s;
+  }
+  function svgSolve(){
+    return '<svg viewBox="0 0 560 360" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">'
+    +'<text x="40" y="80" font-family="Fraunces" font-size="16" fill="var(--paper)">Woman pradhan</text>'
+    +'<text x="40" y="104" font-family="Space Mono" font-size="11" fill="var(--client)">z ↓↓  weak machine</text>'
+    +'<text x="40" y="122" font-family="Space Mono" font-size="11" fill="var(--capture)">h ↓   weak capture</text>'
+    +'<path d="M250 100 H430" stroke="var(--line)"/>'
+    +'<text x="440" y="96" font-family="Space Mono" font-size="12" font-weight="700" fill="var(--signal)">SC/ST ↓</text>'
+    +'<text x="440" y="114" font-family="Space Mono" font-size="9.5" fill="var(--paper-faint)">clientelism wins</text>'
+    +'<line x1="40" y1="170" x2="520" y2="170" stroke="var(--line)" stroke-dasharray="3 4" opacity=".5"/>'
+    +'<text x="40" y="232" font-family="Fraunces" font-size="16" fill="var(--paper)">SC pradhan</text>'
+    +'<text x="40" y="256" font-family="Space Mono" font-size="11" fill="var(--client)">z(SC) ↑  tighter on own group</text>'
+    +'<text x="40" y="274" font-family="Space Mono" font-size="11" fill="var(--capture)">h ↓   less capture</text>'
+    +'<path d="M250 252 H430" stroke="var(--line)"/>'
+    +'<text x="440" y="248" font-family="Space Mono" font-size="12" font-weight="700" fill="var(--client)">SC/ST ↑</text>'
+    +'<text x="440" y="266" font-family="Space Mono" font-size="9.5" fill="var(--paper-faint)">Corollary (iii)</text>'
+    +'<text x="40" y="330" font-family="Space Mono" font-size="10.5" fill="var(--paper-faint)">Neither force alone reproduces both rows.</text>'
+    +'</svg>';
+  }
+  function svgTwistCapture(){
+    var data=[{g:"Bagdis (SC)",pop:7.6,ben:23.5,benL:"23–24%",fav:true},
+              {g:"Muchis (SC)",pop:5.0,ben:6.0,benL:"5–7%"},
+              {g:"Santals (ST)",pop:5.0,ben:6.0,benL:"5–7%"}];
+    var scale=4.0;
+    var s='<svg viewBox="0 0 560 360" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">';
+    s+='<text x="40" y="64" font-family="Space Mono" font-size="10.5" fill="var(--paper-faint)">share of land titles &amp; subsidized loans  vs  population</text>';
+    data.forEach(function(d,i){
+      var y=104+i*78, c=d.fav?"var(--signal)":"var(--client)";
+      s+='<text x="40" y="'+(y-10)+'" font-family="Space Mono" font-size="11.5" fill="'+(d.fav?"var(--signal)":"var(--paper-dim)")+'">'+d.g+'</text>';
+      s+='<rect x="40" y="'+y+'" width="'+(d.pop*scale)+'" height="14" rx="3" fill="rgba(236,231,223,.30)"/>';
+      s+='<text x="'+(40+d.pop*scale+8)+'" y="'+(y+12)+'" font-family="Space Mono" font-size="10" fill="var(--paper-faint)">pop '+d.pop+'%</text>';
+      s+='<rect x="40" y="'+(y+22)+'" width="'+(d.ben*scale)+'" height="14" rx="3" fill="'+c+'"/>';
+      s+='<text x="'+(40+d.ben*scale+8)+'" y="'+(y+34)+'" font-family="Space Mono" font-size="10" font-weight="700" fill="'+c+'">'+d.benL+'</text>';
+    });
+    s+='<text x="40" y="346" font-family="Space Mono" font-size="10" fill="var(--paper-faint)">The bagdis: 7.6% of people, ≈ a quarter of the benefits.</text></svg>';
+    return s;
+  }
+  function svgTwistLand(){
+    var data=[{g:"Aguris",a:47,b:29,c:"var(--paper-dim)"},
+              {g:"Bagdis",a:14,b:29,c:"var(--signal)",r:true},
+              {g:"Muchis",a:3,b:3,c:"var(--client)"}];
+    var x60=130,x93=420,base=300,top=110,maxV=50;
+    function yv(v){return base-(v/maxV)*(base-top);}
+    var s='<svg viewBox="0 0 560 360" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">';
+    s+='<text x="40" y="64" font-family="Space Mono" font-size="10.5" fill="var(--paper-faint)">% of village land owned · 1960 → 1993</text>';
+    s+='<line x1="'+x60+'" y1="'+base+'" x2="'+x60+'" y2="'+top+'" stroke="var(--line)"/>';
+    s+='<line x1="'+x93+'" y1="'+base+'" x2="'+x93+'" y2="'+top+'" stroke="var(--line)"/>';
+    s+='<text x="'+x60+'" y="'+(base+22)+'" text-anchor="middle" font-family="Space Mono" font-size="11" fill="var(--paper-faint)">1960</text>';
+    s+='<text x="'+x93+'" y="'+(base+22)+'" text-anchor="middle" font-family="Space Mono" font-size="11" fill="var(--paper-faint)">1993</text>';
+    data.forEach(function(d){
+      s+='<line x1="'+x60+'" y1="'+yv(d.a)+'" x2="'+x93+'" y2="'+yv(d.b)+'" stroke="'+d.c+'" stroke-width="'+(d.r?2.4:1.6)+'" opacity="'+(d.r?1:.7)+'"/>';
+      s+='<circle cx="'+x60+'" cy="'+yv(d.a)+'" r="4" fill="'+d.c+'"/>';
+      s+='<circle cx="'+x93+'" cy="'+yv(d.b)+'" r="4" fill="'+d.c+'"/>';
+      s+='<text x="'+(x60-12)+'" y="'+(yv(d.a)+4)+'" text-anchor="end" font-family="Space Mono" font-size="10" fill="'+d.c+'">'+d.g+' '+d.a+'%</text>';
+      s+='<text x="'+(x93+12)+'" y="'+(yv(d.b)+4)+'" font-family="Space Mono" font-size="10" fill="'+d.c+'">'+d.b+'%</text>';
+    });
+    s+='<text x="40" y="346" font-family="Space Mono" font-size="10" fill="var(--paper-faint)">The favored caste nearly caught the old landed elite.</text></svg>';
+    return s;
+  }
+  function buildTwist(){
+    var f=el("div",{"class":"viz-frame"});
+    f.appendChild(el("div",{"class":"viz-title"},"Ruud (1999) · two Bardhaman villages"));
+    var btns=el("div",{"class":"tw-btns"});
+    var bCap=el("button",{"class":"on"},"Who got benefits");
+    var bLand=el("button",null,"Land, 1960→1993");
+    btns.appendChild(bCap);btns.appendChild(bLand);f.appendChild(btns);
+    var cCap=el("div",{"class":"tw-chart show"},svgTwistCapture());
+    var cLand=el("div",{"class":"tw-chart"},svgTwistLand());
+    f.appendChild(cCap);f.appendChild(cLand);
+    f.appendChild(el("div",{"class":"viz-cap"},"Targeting a loyal group is the machine working — not justice arriving."));
+    bCap.onclick=function(){bCap.classList.add("on");bLand.classList.remove("on");cCap.classList.add("show");cLand.classList.remove("show");};
+    bLand.onclick=function(){bLand.classList.add("on");bCap.classList.remove("on");cLand.classList.add("show");cCap.classList.remove("show");};
+    return f;
+  }
 
-      {view==="capture" ? (
-        <svg viewBox={`0 0 ${W} ${H}`} width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
-          <text x="40" y="64" fontFamily="Space Mono" fontSize="10.5" fill="var(--paper-faint)">
-            share of land titles &amp; subsidized loans  vs  population</text>
-          {RUUD_CAPTURE.map((d,i)=>{
-            const y=104+i*78, scale=4.0;
-            return (
-              <g key={d.group} style={{transition:"all .8s",opacity:on?1:0,transitionDelay:(i*.14)+"s"}}>
-                <text x="40" y={y-10} fontFamily="Space Mono" fontSize="11.5"
-                  fill={d.fav?"var(--signal)":"var(--paper-dim)"}>{d.group}</text>
-                {/* population */}
-                <rect x="40" y={y} width={d.pop*scale} height="14" rx="3" fill="rgba(236,231,223,.30)"/>
-                <text x={40+d.pop*scale+8} y={y+12} fontFamily="Space Mono" fontSize="10" fill="var(--paper-faint)">pop {d.pop}%</text>
-                {/* benefit */}
-                <rect x="40" y={y+22} width={on?d.benefit*scale:0} height="14" rx="3"
-                  fill={d.fav?"var(--signal)":"var(--client)"}
-                  style={{transition:"width 1s cubic-bezier(.22,1,.36,1)",transitionDelay:(.2+i*.14)+"s"}}/>
-                <text x={40+d.benefit*scale+8} y={y+34} fontFamily="Space Mono" fontSize="10"
-                  fontWeight="700" fill={d.fav?"var(--signal)":"var(--client)"}>
-                  {d.fav?"23–24%":"5–7%"}</text>
-              </g>
-            );
-          })}
-          <text x="40" y="346" fontFamily="Space Mono" fontSize="10" fill="var(--paper-faint)">
-            The bagdis: 7.6% of people, ≈ a quarter of the benefits.</text>
-        </svg>
-      ):(
-        <svg viewBox={`0 0 ${W} ${H}`} width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
-          <text x="40" y="64" fontFamily="Space Mono" fontSize="10.5" fill="var(--paper-faint)">
-            % of village land owned · 1960 → 1993</text>
-          {(()=>{ const x60=130,x93=420,base=300,top=110,maxV=50;
-            const yv=v=>base-(v/maxV)*(base-top);
-            const colMap={Aguris:"var(--paper-dim)",Bagdis:"var(--signal)",Muchis:"var(--client)"};
-            return (<g>
-              <line x1={x60} y1={base} x2={x60} y2={top} stroke="var(--line)"/>
-              <line x1={x93} y1={base} x2={x93} y2={top} stroke="var(--line)"/>
-              <text x={x60} y={base+22} textAnchor="middle" fontFamily="Space Mono" fontSize="11" fill="var(--paper-faint)">1960</text>
-              <text x={x93} y={base+22} textAnchor="middle" fontFamily="Space Mono" fontSize="11" fill="var(--paper-faint)">1993</text>
-              {RUUD_LAND.map((d,i)=>{
-                const c=colMap[d.group];
-                return (
-                  <g key={d.group} style={{transition:"all 1s",opacity:on?1:0,transitionDelay:(i*.16)+"s"}}>
-                    <line x1={x60} y1={yv(d.y1960)} x2={on?x93:x60} y2={on?yv(d.y1993):yv(d.y1960)}
-                      stroke={c} strokeWidth={d.rising?2.4:1.6} opacity={d.rising?1:.7}
-                      style={{transition:"all 1.1s cubic-bezier(.22,1,.36,1)",transitionDelay:(.2+i*.16)+"s"}}/>
-                    <circle cx={x60} cy={yv(d.y1960)} r="4" fill={c}/>
-                    <circle cx={x93} cy={yv(d.y1993)} r="4" fill={c}
-                      style={{transition:"all 1.1s",transitionDelay:(.2+i*.16)+"s",
-                        transform:on?"none":`translateX(-${x93-x60}px)`}}/>
-                    <text x={x60-12} y={yv(d.y1960)+4} textAnchor="end" fontFamily="Space Mono" fontSize="10" fill={c}>{d.group} {d.y1960}%</text>
-                    <text x={x93+12} y={yv(d.y1993)+4} fontFamily="Space Mono" fontSize="10" fill={c}>{d.y1993}%</text>
-                  </g>
-                );
-              })}
-            </g>);})()}
-          <text x="40" y="346" fontFamily="Space Mono" fontSize="10" fill="var(--paper-faint)">
-            The favored caste nearly caught the old landed elite.</text>
-        </svg>
-      )}
-      <div className="viz-cap" style={{maxWidth:"58%"}}>Targeting a loyal group is the machine working — not justice arriving.</div>
-    </div>
-  );
-}
+  /* ===== build page ===== */
+  var root=document.getElementById("root");
 
-/* ============================================================
-   STICKY VIZ ROUTER
-   ============================================================ */
-function StickyViz({active, h, z}){
-  const map={
-    setup:   <VizForces on={active==="setup"}/>,
-    capture: <VizBeamState h={1} z={0} title="Capture turned up" highlightElite
-               cap="Corollary (i): a rise in capture raises the elite's share and lowers everyone else's."/>,
-    client:  <VizBeamState h={0} z={1} title="Clientelism turned up" highlightSig
-               cap="Corollary (ii): uniform clientelism lowers the elite's share and lifts the rest."/>,
-    model:   <VizModel on={active==="model"}/>,
-    tug:     <VizBeamState h={h} z={z} title="Your allocation" highlightElite={h>z} highlightSig={z>h}
-               cap="Drag the dials. Directions follow the paper's proofs; heights are schematic."/>,
-    puzzle:  <VizFacts on={active==="puzzle"}/>,
-    solve:   <VizSolve on={active==="solve"}/>,
-    twist:   <VizTwist on={active==="twist"}/>,
+  var heroHTML=''
+  +'<header class="hero">'
+  +'<div class="credit"><span class="pill">Indian Economic Review · 2023</span><br>'
+  +'Pranab Bardhan &amp; Dilip Mookherjee · Berkeley &amp; Boston University</div>'
+  +'<p class="eyebrow">An interactive reading of "Political clientelism and capture"</p>'
+  +'<h1 class="serif">Who really<br>gets the<br>benefits?</h1>'
+  +'<p class="dek">Two hidden forces quietly bend where public money goes. Apart, neither explains what happened in rural West Bengal. Together, they do.</p>'
+  +'<div class="scrollcue"><span class="ln"></span> Scroll to begin</div>'
+  +'</header>';
+
+  function chap(id,extra){return '<section class="chapter'+(extra?" tall":"")+'" id="ch-'+id+'" data-id="'+id+'">';}
+  var S=SECTIONS;
+  var chaptersHTML='<div class="col-text">'
+  +chap("setup")+'<div class="num">'+S[0].num+'</div><h2 class="reveal">'+S[0].title+'</h2>'
+    +'<p class="reveal">When a government hands out private benefits — workfare, drinking water, subsidized loans, housing, pensions — the stated goal is to reach the needy.</p>'
+    +'<p class="reveal">In practice, two political distortions bend the money off course. Economists usually study them <strong>one at a time</strong>. Bardhan and Mookherjee insist they live together — and that\'s the whole story.</p></section>'
+  +chap("capture")+'<div class="num">'+S[1].num+'</div><h2 class="reveal">'+S[1].title+'</h2>'
+    +'<p class="reveal">Wealthy groups bankroll campaigns. In return, parties quietly tilt the benefit allocation toward them — a deal modeled on Grossman &amp; Helpman.</p>'
+    +'<p class="reveal">The strength of this channel is a single dial, <span class="accent-cap">h</span>, the power of campaign money to move votes. Turn it up and benefits flow <strong>upward</strong>: the <span class="accent-cap">elite\'s</span> share grows, every group below it shrinks. Regressive by design.</p></section>'
+  +chap("client")+'<div class="num">'+S[2].num+'</div><h2 class="reveal">'+S[2].title+'</h2>'
+    +'<p class="reveal">Parties can also watch how groups vote and withhold benefits from those who don\'t deliver. That monitoring power is the dial <span class="accent-cli">z</span>.</p>'
+    +'<p class="reveal">Because poorer voters are "cheaper to buy," uniform clientelism is often <strong>progressive</strong> — it can pull the <span class="accent-cap">elite\'s</span> share down. But it plays favorites among the poor, rewarding whichever group the machine can watch most closely.</p></section>'
+  +chap("model")+'<div class="num">'+S[3].num+'</div><h2 class="reveal">'+S[3].title+'</h2>'
+    +'<p class="reveal">The model squeezes all of this into one number per group — a <strong>political welfare weight</strong>. Three things move it.</p>'
+    +'<div class="eqn reveal"><span class="lbl">non-elite:</span><br>δᵢ = σᵢ · [ θ + (1−θ)·γ̂·zᵢ ]<br><br><span class="lbl">elite:</span><br>δ_E = σ_E·[ θ + (1−θ)·γ̂·z_E ] <span style="color:var(--capture)">+ h·γ̂</span></div>'
+    +'<p class="reveal">Swing (<span class="accent-cli">σ</span>), clientelism (<span class="accent-cli">z</span>), capture (<span class="accent-cap">h</span>). Only the elite carries that extra capture term.</p></section>'
+  +chap("tug",true)+'<div class="num">'+S[4].num+'</div><h2 class="reveal">'+S[4].title+'</h2>'
+    +'<p class="reveal">Here is the paper\'s central contrast. Capture and clientelism push the elite\'s share in <strong>opposite directions</strong>. Move each dial and watch the allocation re-skew.</p>'
+    +'<div class="controls reveal">'
+    +'<div class="ctrl cap"><label>Capture · h <span class="val" id="hval">0.25</span></label>'
+    +'<input type="range" id="hslider" min="0" max="1" step="0.01" value="0.25" aria-label="Capture strength"></div>'
+    +'<div class="ctrl cli"><label>Clientelism · z <span class="val" id="zval">0.25</span></label>'
+    +'<input type="range" id="zslider" min="0" max="1" step="0.01" value="0.25" aria-label="Clientelism strength"></div></div>'
+    +'<p class="note reveal">Illustrative dynamics. The <em>direction</em> of every change is a result the paper proves (Corollaries i–iii); the bar heights are schematic, not empirical estimates.</p></section>'
+  +chap("puzzle")+'<div class="num">'+S[5].num+'</div><h2 class="reveal">'+S[5].title+'</h2>'
+    +'<p class="reveal">Now the evidence. From 1998–2004 household surveys in West Bengal, an earlier study tracked the share of benefits reaching the most disadvantaged households — <span class="accent-sig">Scheduled Castes and Tribes (SC/ST)</span>. Reserving the village head (<em>pradhan</em>) post moved that share in puzzling ways.</p>'
+    +'<ul class="facts reveal">'
+    +FACTS.map(function(f){var sym=f.dir==="up"?'<span class="arr up">▲ </span>':f.dir==="down"?'<span class="arr down">▼ </span>':'<span class="arr">◇ </span>';return '<li><span class="tag">'+f.tag+'</span><p>'+sym+f.txt+'</p></li>';}).join("")
+    +'</ul></section>'
+  +chap("solve")+'<div class="num">'+S[6].num+'</div><h2 class="reveal">'+S[6].title+'</h2>'
+    +'<p class="reveal">Women elected to reserved seats were usually new to politics. Inexperience weakened the <span class="accent-cli">machine</span> more than it weakened <span class="accent-cap">capture</span> — so the SC/ST share <span class="accent-sig">dropped</span>.</p>'
+    +'<p class="reveal">An <strong>SC</strong> pradhan, by contrast, tightened the machine around his own community — so their share <span class="accent-cli">rose</span>. And where inequality was already high, the elite had already captured so much that there was little room left to fall (Fact 4).</p>'
+    +'<p class="reveal"><span class="accent-cap">Capture alone</span> can\'t explain why a woman — even a woman SC candidate — would hurt SC/ST households. <span class="accent-cli">Clientelism alone</span> can\'t explain Fact 1. You need both.</p></section>'
+  +chap("twist",true)+'<div class="num">'+S[7].num+'</div><h2 class="reveal">'+S[7].title+'</h2>'
+    +'<p class="reveal">An ethnography of two Bardhaman villages shows the machine at work. The <span class="accent-sig">bagdis</span> — 7.6% of the population — captured nearly a quarter of land titles and subsidized loans, while other scheduled castes received crumbs. Over three decades they nearly caught the old landed elite.</p>'
+    +'<p class="reveal">So higher "targeting" toward a favored group can be <strong>distortion, not fairness</strong>. When women\'s inexperience lowered the targeting ratio, it may have cut political distortion — a welfare gain hiding inside a worse-looking statistic.</p>'
+    +'<p class="reveal" style="color:var(--paper)">The headline number you\'d reach for — "share reaching the poor" — turns out to be the one thing you can\'t read straight.</p></section>'
+  +'</div>';
+
+  var outroHTML=''
+  +'<footer class="outro">'
+  +'<p class="eyebrow"><b>Conclusion</b></p>'
+  +'<h2 class="serif">A theory of clientelism-cum-capture.</h2>'
+  +'<p>Bardhan and Mookherjee argue these West Bengal patterns can\'t be reconciled with standard models of redistributive politics — Downsian competition, citizen-candidate preferences, or elite capture on its own. They fit only when clientelism and capture co-exist and interact.</p>'
+  +'<p>Their unsettling takeaway: a fall in measured targeting to poor groups can represent a <em>reduction</em> in political distortion, and even a net welfare gain — while a rise can mask deepening machine politics. Targeting ratios alone can\'t tell you which.</p>'
+  +'<div class="ref">Bardhan, P. &amp; Mookherjee, D. (2023). "Political clientelism and capture: theory and an application." <em>Indian Economic Review</em>, 58 (Suppl 1), S17–S34. https://doi.org/10.1007/s41775-023-00169-w<br><br>Empirical figures: Ruud (1999), via footnote 12. This page visualizes the paper\'s own results; schematic figures are labeled as such.</div>'
+  +'</footer>';
+
+  root.innerHTML=heroHTML+'<main class="scrolly">'+chaptersHTML+'<div class="col-viz order-viz" id="vizcol"></div></main>'+outroHTML;
+
+  /* ===== build viz column ===== */
+  var vizcol=document.getElementById("vizcol");
+  var beamCap=makeBeam(), beamCli=makeBeam(), beamTug=makeBeam();
+  function beamFrame(beam,title,capText){
+    var f=el("div",{"class":"viz-frame"});
+    f.appendChild(el("div",{"class":"viz-title"},title));
+    var wrap=el("div",{"class":"beam-wrap"});wrap.appendChild(beam.node);f.appendChild(wrap);
+    f.appendChild(el("div",{"class":"viz-cap"},capText));
+    return f;
+  }
+  var vizMap={
+    setup:  frame("The two forces", svgForces(), "Studied apart for decades. This paper puts them in the same room."),
+    capture:beamFrame(beamCap,"Capture turned up","Corollary (i): a rise in capture raises the elite's share and lowers everyone else's."),
+    client: beamFrame(beamCli,"Clientelism turned up","Corollary (ii): uniform clientelism lowers the elite's share and lifts the rest."),
+    model:  frame("Political welfare weight  δᵢ", svgModel(), "Every distortion collapses into one number per group."),
+    tug:    beamFrame(beamTug,"Your allocation","Drag the dials. Directions follow the paper's proofs; heights are schematic."),
+    puzzle: frame("SC/ST benefit share · West Bengal 1998–2004", svgFacts(), "No standard model predicts all four at once."),
+    solve:  frame("Reservation → mechanism → SC/ST share", svgSolve(), "The contradiction dissolves only when the two forces interact."),
+    twist:  buildTwist()
   };
-  return (
-    <div className="col-viz order-viz">
-      {SECTIONS.map(s=>(
-        <div key={s.id} style={{position:"absolute",inset:0,padding:"0",
-          display:"flex",alignItems:"center",
-          opacity:active===s.id?1:0,
-          transform:active===s.id?"none":"scale(.985)",
-          pointerEvents:active===s.id?"auto":"none",
-          transition:"opacity .6s ease, transform .6s ease"}}>
-          {map[s.id]}
-        </div>
-      ))}
-    </div>
-  );
-}
+  var vwEls={};
+  SECTIONS.forEach(function(s){
+    var vw=el("div",{"class":"vw","data-id":s.id});
+    vw.appendChild(vizMap[s.id]);
+    vizcol.appendChild(vw);
+    vwEls[s.id]=vw;
+  });
 
-/* ============================================================
-   TEXT CHAPTERS
-   ============================================================ */
-function Chapters({h,setH,z,setZ}){
-  return (
-    <div className="col-text">
-      {/* 01 */}
-      <section className="chapter" id="ch-setup" data-id="setup">
-        <div className="num">{SECTIONS[0].num}</div>
-        <h2 className="reveal">{SECTIONS[0].title}</h2>
-        <p className="reveal">When a government hands out private benefits — workfare, drinking water,
-          subsidized loans, housing, pensions — the stated goal is to reach the needy.</p>
-        <p className="reveal">In practice, two political distortions bend the money off course.
-          Economists usually study them <strong>one at a time</strong>. Bardhan and Mookherjee insist
-          they live together — and that's the whole story.</p>
-      </section>
+  /* ===== tug sliders ===== */
+  var hslider=document.getElementById("hslider"), zslider=document.getElementById("zslider");
+  var hval=document.getElementById("hval"), zval=document.getElementById("zval");
+  function updateTug(){
+    var h=parseFloat(hslider.value), z=parseFloat(zslider.value);
+    hval.textContent=h.toFixed(2);zval.textContent=z.toFixed(2);
+    beamTug.set(computeShares(h,z), h>z, z>h);
+  }
+  hslider.addEventListener("input",updateTug);
+  zslider.addEventListener("input",updateTug);
 
-      {/* 02 */}
-      <section className="chapter" id="ch-capture" data-id="capture">
-        <div className="num">{SECTIONS[1].num}</div>
-        <h2 className="reveal">{SECTIONS[1].title}</h2>
-        <p className="reveal">Wealthy groups bankroll campaigns. In return, parties quietly tilt the
-          benefit allocation toward them — a deal modeled on Grossman &amp; Helpman.</p>
-        <p className="reveal">The strength of this channel is a single dial, <span className="accent-cap">h</span>,
-          the power of campaign money to move votes. Turn it up and benefits flow <strong>upward</strong>:
-          the <span className="accent-cap">elite's</span> share grows, every group below it shrinks.
-          Regressive by design.</p>
-      </section>
+  /* ===== active section observer ===== */
+  var seen={};
+  var current=null;
+  function activate(id){
+    if(current===id)return;current=id;
+    SECTIONS.forEach(function(s){vwEls[s.id].classList.toggle("active",s.id===id);});
+    if(!seen[id]){
+      seen[id]=true;
+      if(id==="capture")beamCap.set(computeShares(1,0),true,false);
+      if(id==="client") beamCli.set(computeShares(0,1),false,true);
+      if(id==="tug")     updateTug();
+    }else{
+      if(id==="tug")updateTug();
+    }
+  }
+  var actObs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting)activate(e.target.dataset.id);});
+  },{rootMargin:"-45% 0px -45% 0px",threshold:0});
+  SECTIONS.forEach(function(s){var c=document.getElementById("ch-"+s.id);if(c)actObs.observe(c);});
+  activate("setup");
 
-      {/* 03 */}
-      <section className="chapter" id="ch-client" data-id="client">
-        <div className="num">{SECTIONS[2].num}</div>
-        <h2 className="reveal">{SECTIONS[2].title}</h2>
-        <p className="reveal">Parties can also watch how groups vote and withhold benefits from those who
-          don't deliver. That monitoring power is the dial <span className="accent-cli">z</span>.</p>
-        <p className="reveal">Because poorer voters are "cheaper to buy," uniform clientelism is often
-          <strong> progressive</strong> — it can pull the <span className="accent-cap">elite's</span>
-          share down. But it plays favorites among the poor, rewarding whichever group the machine can
-          watch most closely.</p>
-      </section>
+  /* ===== reveal observer ===== */
+  var revObs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");revObs.unobserve(e.target);}});
+  },{threshold:.2});
+  document.querySelectorAll(".reveal").forEach(function(n){revObs.observe(n);});
 
-      {/* 04 */}
-      <section className="chapter" id="ch-model" data-id="model">
-        <div className="num">{SECTIONS[3].num}</div>
-        <h2 className="reveal">{SECTIONS[3].title}</h2>
-        <p className="reveal">The model squeezes all of this into one number per group — a
-          <strong> political welfare weight</strong>. Three things move it.</p>
-        <div className="eqn reveal">
-          <span className="lbl">non-elite:</span><br/>δᵢ = σᵢ · [ θ + (1−θ)·γ̂·zᵢ ]<br/><br/>
-          <span className="lbl">elite:</span><br/>δ_E = σ_E·[ θ + (1−θ)·γ̂·z_E ] <span style={{color:"var(--capture)"}}>+ h·γ̂</span>
-        </div>
-        <p className="reveal">Swing (<span className="accent-cli">σ</span>), clientelism
-          (<span className="accent-cli">z</span>), capture (<span className="accent-cap">h</span>).
-          Only the elite carries that extra capture term.</p>
-      </section>
+  /* ===== progress rail ===== */
+  function onScroll(){
+    var sc=document.documentElement.scrollTop||document.body.scrollTop;
+    var max=(document.documentElement.scrollHeight-window.innerHeight)||1;
+    document.getElementById("rail").style.width=(100*sc/max)+"%";
+  }
+  window.addEventListener("scroll",onScroll,{passive:true});onScroll();
 
-      {/* 05 interactive */}
-      <section className="chapter tall" id="ch-tug" data-id="tug">
-        <div className="num">{SECTIONS[4].num}</div>
-        <h2 className="reveal">{SECTIONS[4].title}</h2>
-        <p className="reveal">Here is the paper's central contrast. Capture and clientelism push the
-          elite's share in <strong>opposite directions</strong>. Move each dial and watch the allocation
-          re-skew.</p>
-        <div className="controls reveal">
-          <div className="ctrl cap">
-            <label>Capture · h <span className="val">{h.toFixed(2)}</span></label>
-            <input type="range" min="0" max="1" step="0.01" value={h}
-              onChange={e=>setH(+e.target.value)} aria-label="Capture strength"/>
-          </div>
-          <div className="ctrl cli">
-            <label>Clientelism · z <span className="val">{z.toFixed(2)}</span></label>
-            <input type="range" min="0" max="1" step="0.01" value={z}
-              onChange={e=>setZ(+e.target.value)} aria-label="Clientelism strength"/>
-          </div>
-        </div>
-        <p className="note reveal">Illustrative dynamics. The <em>direction</em> of every change is a
-          result the paper proves (Corollaries i–iii); the bar heights are schematic, not empirical
-          estimates.</p>
-      </section>
-
-      {/* 06 */}
-      <section className="chapter" id="ch-puzzle" data-id="puzzle">
-        <div className="num">{SECTIONS[5].num}</div>
-        <h2 className="reveal">{SECTIONS[5].title}</h2>
-        <p className="reveal">Now the evidence. From 1998–2004 household surveys in West Bengal, an earlier
-          study tracked the share of benefits reaching the most disadvantaged households —
-          <span className="accent-sig"> Scheduled Castes and Tribes (SC/ST)</span>. Reserving the village
-          head (<em>pradhan</em>) post moved that share in puzzling ways.</p>
-        <ul className="facts reveal">
-          {FACTS.map((f,i)=>(
-            <li key={i}>
-              <span className="tag">{f.tag}</span>
-              <p><span className={"arr "+(f.dir==="up"?"up":f.dir==="down"?"down":"")}>
-                {f.dir==="up"?"▲ ":f.dir==="down"?"▼ ":"◇ "}</span>{f.txt}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* 07 */}
-      <section className="chapter" id="ch-solve" data-id="solve">
-        <div className="num">{SECTIONS[6].num}</div>
-        <h2 className="reveal">{SECTIONS[6].title}</h2>
-        <p className="reveal">Women elected to reserved seats were usually new to politics. Inexperience
-          weakened the <span className="accent-cli">machine</span> more than it weakened
-          <span className="accent-cap"> capture</span> — so the SC/ST share <span className="accent-sig">dropped</span>.</p>
-        <p className="reveal">An <strong>SC</strong> pradhan, by contrast, tightened the machine around his
-          own community — so their share <span className="accent-cli">rose</span>. And where inequality was
-          already high, the elite had already captured so much that there was little room left to fall
-          (Fact 4).</p>
-        <p className="reveal"><span className="accent-cap">Capture alone</span> can't explain why a
-          woman — even a woman SC candidate — would hurt SC/ST households.
-          <span className="accent-cli"> Clientelism alone</span> can't explain Fact 1. You need both.</p>
-      </section>
-
-      {/* 08 */}
-      <section className="chapter tall" id="ch-twist" data-id="twist">
-        <div className="num">{SECTIONS[7].num}</div>
-        <h2 className="reveal">{SECTIONS[7].title}</h2>
-        <p className="reveal">An ethnography of two Bardhaman villages shows the machine at work. The
-          <span className="accent-sig"> bagdis</span> — 7.6% of the population — captured nearly a
-          quarter of land titles and subsidized loans, while other scheduled castes received crumbs.
-          Over three decades they nearly caught the old landed elite.</p>
-        <p className="reveal">So higher "targeting" toward a favored group can be <strong>distortion,
-          not fairness</strong>. When women's inexperience lowered the targeting ratio, it may have cut
-          political distortion — a welfare gain hiding inside a worse-looking statistic.</p>
-        <p className="reveal" style={{color:"var(--paper)"}}>The headline number you'd reach for —
-          "share reaching the poor" — turns out to be the one thing you can't read straight.</p>
-      </section>
-    </div>
-  );
-}
-
-/* ============================================================
-   APP
-   ============================================================ */
-function App(){
-  const ids=SECTIONS.map(s=>s.id);
-  const active=useActiveSection(ids);
-  const [h,setH]=useState(0.25);
-  const [z,setZ]=useState(0.25);
-  useReveal();
-
-  // progress rail
-  useEffect(()=>{
-    const onScroll=()=>{
-      const sc=document.documentElement.scrollTop;
-      const max=document.documentElement.scrollHeight-window.innerHeight;
-      document.getElementById("rail").style.width=(100*sc/max)+"%";
-    };
-    window.addEventListener("scroll",onScroll,{passive:true});onScroll();
-    return ()=>window.removeEventListener("scroll",onScroll);
-  },[]);
-
-  return (
-    <div>
-      {/* HERO */}
-      <header className="hero">
-        <div className="credit">
-          <span className="pill">Indian Economic Review · 2023</span><br/>
-          Pranab Bardhan &amp; Dilip Mookherjee · Berkeley &amp; Boston University
-        </div>
-        <p className="eyebrow">An interactive reading of "Political clientelism and capture"</p>
-        <h1 className="serif">Who really<br/>gets the<br/>benefits?</h1>
-        <p className="dek">Two hidden forces quietly bend where public money goes.
-          Apart, neither explains what happened in rural West Bengal. Together, they do.</p>
-        <div className="scrollcue"><span className="ln"></span> Scroll to begin</div>
-      </header>
-
-      {/* SCROLLY */}
-      <main className="scrolly">
-        <Chapters h={h} setH={setH} z={z} setZ={setZ}/>
-        <StickyViz active={active} h={h} z={z}/>
-      </main>
-
-      {/* OUTRO */}
-      <footer className="outro">
-        <p className="eyebrow"><b>Conclusion</b></p>
-        <h2 className="serif">A theory of clientelism-cum-capture.</h2>
-        <p>Bardhan and Mookherjee argue these West Bengal patterns can't be reconciled with standard
-          models of redistributive politics — Downsian competition, citizen-candidate preferences, or
-          elite capture on its own. They fit only when clientelism and capture co-exist and interact.</p>
-        <p>Their unsettling takeaway: a fall in measured targeting to poor groups can represent a
-          <em> reduction</em> in political distortion, and even a net welfare gain — while a rise can mask
-          deepening machine politics. Targeting ratios alone can't tell you which.</p>
-        <div className="ref">
-          Bardhan, P. &amp; Mookherjee, D. (2023). "Political clientelism and capture: theory and an
-          application." <em>Indian Economic Review</em>, 58 (Suppl 1), S17–S34.
-          https://doi.org/10.1007/s41775-023-00169-w<br/><br/>
-          Empirical figures: Ruud (1999), via footnote 12. This page visualizes the paper's own results;
-          schematic figures are labeled as such.
-        </div>
-      </footer>
-    </div>
-  );
-}
-
-ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
-// hide loader once mounted
-requestAnimationFrame(()=>{const l=document.getElementById("loader");if(l)l.classList.add("gone");setTimeout(()=>l&&l.remove(),700);});
+  /* ===== hide loader ===== */
+  function hideLoader(){var l=document.getElementById("loader");if(l){l.classList.add("gone");setTimeout(function(){if(l&&l.parentNode)l.parentNode.removeChild(l);},700);}}
+  hideLoader();
+})();
+// absolute fallback: never leave the loader stuck even if something errors
+window.addEventListener("load",function(){var l=document.getElementById("loader");if(l)l.classList.add("gone");});
+setTimeout(function(){var l=document.getElementById("loader");if(l)l.classList.add("gone");},4000);
 </script>
 </body>
 </html>
